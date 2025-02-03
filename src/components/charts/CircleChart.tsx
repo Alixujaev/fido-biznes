@@ -18,6 +18,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
+import { Resizable } from "re-resizable";
 const chartData = [
   { browser: "chrome", visitors: 275, fill: "var(--color-chrome)" },
   { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
@@ -58,7 +59,12 @@ export function CircleChartComponent() {
   }, []);
 
   return (
-    <Card className="flex flex-col">
+    <Resizable
+      defaultSize={{ height: 370, width: 400 }}
+      minHeight={370}
+      minWidth={400}
+      className="border border-sidebar-border rounded-2xl flex flex-col"
+    >
       <CardHeader className="items-center pb-0">
         <CardTitle>Pie Chart - Donut with Text</CardTitle>
         <CardDescription>January - June 2024</CardDescription>
@@ -121,6 +127,6 @@ export function CircleChartComponent() {
           Showing total visitors for the last 6 months
         </div>
       </CardFooter>
-    </Card>
+    </Resizable>
   );
 }

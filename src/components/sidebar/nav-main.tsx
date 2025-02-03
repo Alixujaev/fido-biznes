@@ -19,6 +19,7 @@ import {
 import { pages } from "@/lib/consts";
 
 import { useDrag } from "react-dnd";
+import DraggableItem from "../DraggableComponent";
 
 const components = [
   { id: "circle-chart", name: "Circle Chart" },
@@ -79,11 +80,13 @@ export function NavMain({
               <CollapsibleContent>
                 <SidebarMenuSub>
                   {components.map((comp) => (
-                    <DraggableItem
-                      key={comp.id}
-                      id={comp.id}
-                      name={comp.name}
-                    />
+                    <div className="p-2 bg-white shadow-md rounded-md cursor-pointer mb-2">
+                      <DraggableItem
+                        key={comp.id}
+                        id={comp.id}
+                        name={comp.name}
+                      />
+                    </div>
                   ))}
                 </SidebarMenuSub>
               </CollapsibleContent>
@@ -92,26 +95,5 @@ export function NavMain({
         ))}
       </SidebarMenu>
     </SidebarGroup>
-  );
-}
-
-function DraggableItem({ id, name }: { id: string; name: string }) {
-  const [{ isDragging }, drag] = useDrag(() => ({
-    type: "COMPONENT",
-    item: { id, name },
-    collect: (monitor) => ({
-      isDragging: monitor.isDragging(),
-    }),
-  }));
-
-  return (
-    <div
-      ref={drag}
-      className={`p-2 bg-white shadow-md rounded-md cursor-pointer mb-2 ${
-        isDragging ? "opacity-50" : "opacity-100"
-      }`}
-    >
-      {name}
-    </div>
   );
 }

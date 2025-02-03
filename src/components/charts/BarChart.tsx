@@ -17,6 +17,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
+import { Resizable } from "re-resizable";
 const chartData = [
   { month: "January", desktop: 186 },
   { month: "February", desktop: 305 },
@@ -35,7 +36,12 @@ const chartConfig = {
 
 export function BarChartComponent() {
   return (
-    <Card>
+    <Resizable
+      defaultSize={{ height: 370, width: 400 }}
+      minHeight={370}
+      minWidth={400}
+      className="border border-sidebar-border rounded-2xl"
+    >
       <CardHeader>
         <CardTitle>Bar Chart</CardTitle>
         <CardDescription>January - June 2024</CardDescription>
@@ -67,6 +73,6 @@ export function BarChartComponent() {
           Showing total visitors for the last 6 months
         </div>
       </CardFooter>
-    </Card>
+    </Resizable>
   );
 }
