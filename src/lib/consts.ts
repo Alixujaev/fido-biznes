@@ -1,12 +1,6 @@
 import {
-  BookOpen,
-  Bot,
-  Frame,
   GalleryVerticalEnd,
   Home,
-  Map,
-  PieChart,
-  Settings2,
   SquareTerminal,
 } from "lucide-react";
 
@@ -29,16 +23,28 @@ export const data = {
       isActive: true,
       items: [
         {
-          title: "History",
-          url: "#",
+          title: "Circle chart",
+          url: "/circle-chart",
         },
         {
-          title: "Starred",
-          url: "#",
+          title: "Line chart",
+          url: "/line-chart",
         },
         {
-          title: "Settings",
-          url: "#",
+          title: "Bar chart",
+          url: "/bar-chart",
+        },
+        {
+          title: "Data table",
+          url: "/table",
+        },
+        {
+          title: "Price card",
+          url: "/card",
+        },
+        {
+          title: "Line card",
+          url: "/line-card",
         },
       ],
     },
@@ -48,7 +54,7 @@ export const data = {
 export const pages = [
   {
     title: "Dashboard",
-    url: "#",
+    url: "/",
     icon: Home,
   },
 ]

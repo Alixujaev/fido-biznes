@@ -1,5 +1,5 @@
 import { data } from "@/lib/consts";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
 const Navbar = () => {
   const { user } = data;

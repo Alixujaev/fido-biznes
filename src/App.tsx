@@ -1,4 +1,4 @@
-import Navbar from "./components/Navbar";
+import Navbar from "./components/sidebar/Navbar";
 import Layout from "./layout";
 import AppRoutes from "./routes/AppRoutes";
 
