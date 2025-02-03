@@ -15,10 +15,19 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarMenuSub,
-  SidebarMenuSubButton,
-  SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
 import { pages } from "@/lib/consts";
+
+import { useDrag } from "react-dnd";
+
+const components = [
+  { id: "circle-chart", name: "Circle Chart" },
+  { id: "line-chart", name: "Line Chart" },
+  { id: "bar-chart", name: "Bar Chart" },
+  { id: "table", name: "Data Table" },
+  { id: "card", name: "Price Card" },
+  { id: "line-card", name: "Line Card" },
+];
 
 export function NavMain({
   items,
@@ -69,14 +78,12 @@ export function NavMain({
               </CollapsibleTrigger>
               <CollapsibleContent>
                 <SidebarMenuSub>
-                  {item.items?.map((subItem) => (
-                    <SidebarMenuSubItem key={subItem.title}>
-                      <SidebarMenuSubButton asChild>
-                        <a href={subItem.url}>
-                          <span>{subItem.title}</span>
-                        </a>
-                      </SidebarMenuSubButton>
-                    </SidebarMenuSubItem>
+                  {components.map((comp) => (
+                    <DraggableItem
+                      key={comp.id}
+                      id={comp.id}
+                      name={comp.name}
+                    />
                   ))}
                 </SidebarMenuSub>
               </CollapsibleContent>
@@ -85,5 +92,26 @@ export function NavMain({
         ))}
       </SidebarMenu>
     </SidebarGroup>
+  );
+}
+
+function DraggableItem({ id, name }: { id: string; name: string }) {
+  const [{ isDragging }, drag] = useDrag(() => ({
+    type: "COMPONENT",
+    item: { id, name },
+    collect: (monitor) => ({
+      isDragging: monitor.isDragging(),
+    }),
+  }));
+
+  return (
+    <div
+      ref={drag}
+      className={`p-2 bg-white shadow-md rounded-md cursor-pointer mb-2 ${
+        isDragging ? "opacity-50" : "opacity-100"
+      }`}
+    >
+      {name}
+    </div>
   );
 }

@@ -2,8 +2,7 @@ import { TableDemo } from "@/components/table/DataTable";
 
 const Table = () => {
   return (
-    <div>
-      <h2 className="text-xl font-medium mb-2">Data Table</h2>
+    <div className="p-4 bg-white border border-sidebar-border rounded-2xl">
       <TableDemo />
     </div>
   );

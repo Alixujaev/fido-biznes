@@ -3,7 +3,7 @@ import { DollarSign } from "lucide-react";
 
 export default function PriceCard() {
   return (
-    <Card className="bg-sidebar text-white pt-3 rounded-2xl w-full max-w-sm border border-sidebar-border">
+    <Card className="text-white pt-3 rounded-2xl w-full max-w-sm border border-sidebar-border">
       <CardContent className="flex flex-col space-y-2">
         <div className="flex justify-between items-center">
           <span className="text-sm text-gray-500">Total Revenue</span>
