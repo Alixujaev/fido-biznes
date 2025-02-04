@@ -1,4 +1,3 @@
-import { Toaster } from "react-hot-toast";
 import Navbar from "./components/sidebar/Navbar";
 import Layout from "./layout";
 import Dashboard from "./pages/dashboard";
