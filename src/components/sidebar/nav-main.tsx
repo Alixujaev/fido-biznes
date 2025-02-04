@@ -18,7 +18,6 @@ import {
 } from "@/components/ui/sidebar";
 import { pages } from "@/lib/consts";
 
-import { useDrag } from "react-dnd";
 import DraggableItem from "../DraggableComponent";
 
 const components = [
@@ -80,7 +79,7 @@ export function NavMain({
               <CollapsibleContent>
                 <SidebarMenuSub>
                   {components.map((comp) => (
-                    <div className="p-2 bg-white shadow-md rounded-md cursor-pointer mb-2">
+                    <div className="p-2 bg-white shadow-md rounded-xl cursor-pointer mb-2">
                       <DraggableItem
                         key={comp.id}
                         id={comp.id}

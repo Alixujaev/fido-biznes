@@ -3,7 +3,7 @@ import { Progress } from "../ui/progress";
 import React from "react";
 
 const LineCard = () => {
-  const [progress, setProgress] = React.useState(13);
+  const [progress, _] = React.useState(13);
   return (
     <Resizable
       defaultSize={{ width: 200, height: 120 }}
