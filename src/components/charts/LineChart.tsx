@@ -47,7 +47,7 @@ export function LineChartComponent({
   height?: number;
 }) {
   const ref = useRef<any>(null);
-  const { setDroppedComponents } = useContext(DnDContext);
+  const { setDroppedComponents, isOpenSidebar } = useContext(DnDContext);
   return (
     <Resizable
       defaultSize={{
@@ -56,9 +56,10 @@ export function LineChartComponent({
       }}
       minHeight={370}
       minWidth={400}
+      maxWidth={isOpenSidebar ? 1240 : 1450}
       onResize={() => handleResize(ref, setDroppedComponents, id)}
       ref={ref}
-      className="bg-sidebar border border-sidebar-border rounded-2xl flex flex-col"
+      className="bg-sidebar border border-sidebar-border rounded-2xl flex flex-col "
     >
       <CardHeader>
         <CardTitle>Line Chart</CardTitle>

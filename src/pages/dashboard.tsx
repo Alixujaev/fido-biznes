@@ -8,6 +8,7 @@ import { BarChartComponent } from "@/components/charts/BarChart";
 import { TableDemo } from "@/components/table/DataTable";
 import PriceCard from "@/components/cards/PriceCard";
 import LineCard from "@/components/cards/LineCard";
+import { useToast } from "@/hooks/use-toast";
 
 const componentsMap: { [key: string]: JSX.Element } = {
   "circle-chart": <CircleChartComponent />,
@@ -19,8 +20,13 @@ const componentsMap: { [key: string]: JSX.Element } = {
 };
 
 export default function Dashboard() {
-  const { droppedComponents, setDroppedComponents, moveComponent } =
-    useContext(DnDContext);
+  const {
+    droppedComponents,
+    setDroppedComponents,
+    moveComponent,
+    setIsOpenSidebar,
+  } = useContext(DnDContext);
+  const { toast } = useToast();
 
   useEffect(() => {
     const savedComponents = localStorage.getItem("dashboard_components");
@@ -56,9 +62,12 @@ export default function Dashboard() {
       "dashboard_components",
       JSON.stringify(droppedComponents)
     );
+    setIsOpenSidebar(false);
+    toast({
+      title: "Dashboard saved successfully",
+      description: "Your dashboard has been saved successfully.",
+    });
   };
-
-  console.log(droppedComponents);
 
   return (
     <div ref={drop} className="flex-1  min-h-screen">

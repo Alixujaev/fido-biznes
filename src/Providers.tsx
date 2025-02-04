@@ -1,13 +1,18 @@
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { DnDProvider } from "./DndContext";
-import DnDWrapper from "./DnDWrapper";
+import { HTML5Backend } from "react-dnd-html5-backend";
+import { DndProvider } from "react-dnd";
+import { Toaster } from "./components/ui/toaster";
 
 export default function Providers({ children }: { children: React.ReactNode }) {
   return (
-    <DnDWrapper>
+    <DndProvider backend={HTML5Backend}>
       <SidebarProvider>
-        <DnDProvider>{children}</DnDProvider>
+        <DnDProvider>
+          {children}
+          <Toaster />
+        </DnDProvider>
       </SidebarProvider>
-    </DnDWrapper>
+    </DndProvider>
   );
 }

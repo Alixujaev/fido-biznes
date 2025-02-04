@@ -68,7 +68,7 @@ export function TableDemo({
   height?: number;
 }) {
   const ref = useRef<any>(null);
-  const { setDroppedComponents } = useContext(DnDContext);
+  const { setDroppedComponents, isOpenSidebar } = useContext(DnDContext);
   return (
     <Resizable
       defaultSize={{
@@ -77,6 +77,7 @@ export function TableDemo({
       }}
       minHeight={400}
       minWidth={400}
+      maxWidth={isOpenSidebar ? 1240 : 1450}
       onResize={() => handleResize(ref, setDroppedComponents, id)}
       ref={ref}
       className="p-4 bg-sidebar border border-sidebar-border rounded-2xl"

@@ -65,7 +65,7 @@ export function CircleChartComponent({
   height?: number;
 }) {
   const ref = useRef<any>(null);
-  const { setDroppedComponents } = useContext(DnDContext);
+  const { setDroppedComponents, isOpenSidebar } = useContext(DnDContext);
   const totalVisitors = useMemo(() => {
     return chartData.reduce((acc, curr) => acc + curr.visitors, 0);
   }, []);
@@ -78,6 +78,7 @@ export function CircleChartComponent({
       }}
       minHeight={370}
       minWidth={400}
+      maxWidth={isOpenSidebar ? 1240 : 1450}
       onResize={() => handleResize(ref, setDroppedComponents, id)}
       ref={ref}
       className="bg-sidebar border border-sidebar-border rounded-2xl flex flex-col"
