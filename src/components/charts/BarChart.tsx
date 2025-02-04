@@ -40,7 +40,7 @@ export function BarChartComponent() {
       defaultSize={{ height: 370, width: 400 }}
       minHeight={370}
       minWidth={400}
-      className="border border-sidebar-border rounded-2xl"
+      className="bg-sidebar border border-sidebar-border rounded-2xl"
     >
       <CardHeader>
         <CardTitle>Bar Chart</CardTitle>

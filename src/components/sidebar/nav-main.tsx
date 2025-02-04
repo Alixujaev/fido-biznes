@@ -19,6 +19,7 @@ import {
 import { pages } from "@/lib/consts";
 
 import DraggableItem from "../DraggableComponent";
+import { Link } from "react-router-dom";
 
 const components = [
   { id: "circle-chart", name: "Circle Chart" },
@@ -50,10 +51,10 @@ export function NavMain({
           {pages.map((item) => (
             <SidebarMenuItem key={item.title}>
               <SidebarMenuButton asChild>
-                <a href={item.url}>
+                <Link to={item.url}>
                   <item.icon />
                   <span>{item.title}</span>
-                </a>
+                </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
           ))}

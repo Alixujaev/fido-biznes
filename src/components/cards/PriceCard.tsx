@@ -8,7 +8,7 @@ export default function PriceCard() {
       minWidth={200}
       maxHeight={400}
       maxWidth={800}
-      className="text-white p-3 rounded-2xl w-full max-w-sm border border-sidebar-border flex flex-col justify-between"
+      className="bg-sidebar text-white p-3 rounded-2xl w-full max-w-sm border border-sidebar-border flex flex-col justify-between"
     >
       <div className="flex justify-between items-center">
         <span className="text-sm text-gray-500">Total Revenue</span>

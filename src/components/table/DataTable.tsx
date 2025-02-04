@@ -57,7 +57,7 @@ const invoices = [
 
 export function TableDemo() {
   return (
-    <Resizable className="p-4 bg-white border border-sidebar-border rounded-2xl">
+    <Resizable className="p-4 bg-sidebar border border-sidebar-border rounded-2xl">
       <Table>
         <TableCaption>A list of your recent invoices.</TableCaption>
         <TableHeader>

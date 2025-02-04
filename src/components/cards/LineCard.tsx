@@ -11,7 +11,7 @@ const LineCard = () => {
       minWidth={200}
       maxHeight={400}
       maxWidth={800}
-      className=" text-white p-3 rounded-2xl w-full max-w-sm border border-sidebar-border flex flex-col justify-between"
+      className="bg-sidebar text-white p-3 rounded-2xl w-full max-w-sm border border-sidebar-border flex flex-col justify-between"
     >
       <h2 className="text-3xl font-bold text-black">{progress}%</h2>
       <Progress value={progress} />
