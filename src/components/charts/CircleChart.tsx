@@ -1,6 +1,5 @@
 "use client";
 
-import * as React from "react";
 import { TrendingUp } from "lucide-react";
 import { Label, Pie, PieChart } from "recharts";
 
@@ -21,6 +20,7 @@ import {
 import { Resizable } from "re-resizable";
 import { DnDContext } from "@/DndContext";
 import { handleResize } from "@/lib/utils";
+import { useContext, useMemo, useRef } from "react";
 const chartData = [
   { browser: "chrome", visitors: 275, fill: "var(--color-chrome)" },
   { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
@@ -64,8 +64,9 @@ export function CircleChartComponent({
   width?: number;
   height?: number;
 }) {
-  const { setDroppedComponents } = React.useContext(DnDContext);
-  const totalVisitors = React.useMemo(() => {
+  const ref = useRef<any>(null);
+  const { setDroppedComponents } = useContext(DnDContext);
+  const totalVisitors = useMemo(() => {
     return chartData.reduce((acc, curr) => acc + curr.visitors, 0);
   }, []);
 
@@ -77,16 +78,8 @@ export function CircleChartComponent({
       }}
       minHeight={370}
       minWidth={400}
-      onResize={(e, direction, ref, d) =>
-        handleResize(
-          {
-            width: d.width + 400,
-            height: d.height + 370,
-          },
-          setDroppedComponents,
-          id
-        )
-      }
+      onResize={() => handleResize(ref, setDroppedComponents, id)}
+      ref={ref}
       className="bg-sidebar border border-sidebar-border rounded-2xl flex flex-col"
     >
       <CardHeader className="items-center pb-0">

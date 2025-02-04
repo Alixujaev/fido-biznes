@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/table";
 import { handleResize } from "@/lib/utils";
 import { Resizable } from "re-resizable";
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 
 const invoices = [
   {
@@ -67,25 +67,18 @@ export function TableDemo({
   width?: number;
   height?: number;
 }) {
+  const ref = useRef<any>(null);
   const { setDroppedComponents } = useContext(DnDContext);
   return (
     <Resizable
       defaultSize={{
-        width: width && width > 0 ? width : 400,
-        height: height && height > 0 ? height : 400,
+        width: width ? width : 400,
+        height: height ? height : 400,
       }}
       minHeight={400}
       minWidth={400}
-      onResize={(e, direction, ref, d) =>
-        handleResize(
-          {
-            width: d.width + 400,
-            height: d.height + 400,
-          },
-          setDroppedComponents,
-          id
-        )
-      }
+      onResize={() => handleResize(ref, setDroppedComponents, id)}
+      ref={ref}
       className="p-4 bg-sidebar border border-sidebar-border rounded-2xl"
     >
       <Table>

@@ -31,12 +31,21 @@ export default function Dashboard() {
 
   const [, drop] = useDrop(() => ({
     accept: "COMPONENT",
-    drop: (item: { type: string; id: string; name: string }) => {
-      setDroppedComponents((prev: any) => [...prev, item]);
+    drop: (item: { type: string; name: string }) => {
+      setDroppedComponents((prev: any) => [
+        ...prev,
+        {
+          type: item.type,
+          name: item.name,
+          id: `${item.type}-${Date.now()}`,
+        },
+      ]);
     },
   }));
 
   const removeComponent = (id: string) => {
+    console.log(id);
+
     setDroppedComponents((prev: any) =>
       prev.filter((comp: { id: string }) => comp.id !== id)
     );
@@ -48,6 +57,8 @@ export default function Dashboard() {
       JSON.stringify(droppedComponents)
     );
   };
+
+  console.log(droppedComponents);
 
   return (
     <div ref={drop} className="flex-1  min-h-screen">

@@ -11,7 +11,7 @@ function DraggableItem({
 }) {
   const [{ isDragging }, drag] = useDrag(() => ({
     type: "COMPONENT",
-    item: { type: id, id: `${id}-${Date.now()}`, name },
+    item: { type: id, name },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),

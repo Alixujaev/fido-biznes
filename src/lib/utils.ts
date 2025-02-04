@@ -6,13 +6,16 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export const handleResize = (
-  d: { width: number; height: number },
+  ref: any,
   setDroppedComponents: any,
   id?: string
 ) => {
-  setDroppedComponents((prev: any) =>
+  if(ref.current && id){ 
+    setDroppedComponents((prev: any) =>
     prev.map((comp: any) =>
-      comp.id === id ? { ...comp, width: d.width, height: d.height } : comp
+      comp.id === id ? { ...comp, width: ref.current.state.width, height: ref.current.state.height } : comp
     )
   );
+  }
+  
 };
