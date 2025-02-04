@@ -1,10 +1,12 @@
 import { useDrag, useDrop } from "react-dnd";
-import { useRef } from "react";
+import React, { useRef } from "react";
 import { GripVertical, X } from "lucide-react"; // Drag ikonkasi uchun
 
 interface DraggableComponentProps {
   id: string;
   index: number;
+  width?: number;
+  height?: number;
   moveComponent: (dragIndex: number, hoverIndex: number) => void;
   children: React.ReactNode;
   removeComponent: (id: string) => void;
@@ -13,6 +15,8 @@ interface DraggableComponentProps {
 export default function DraggableComponent({
   id,
   index,
+  width,
+  height,
   moveComponent,
   children,
   removeComponent,
@@ -61,7 +65,13 @@ export default function DraggableComponent({
 
       {/* Component ichidagi content */}
       <div className={`flex-1 ${isDragging ? "opacity-50" : "opacity-100"}`}>
-        {children}
+        {React.isValidElement(children)
+          ? React.createElement(
+              children.type,
+              { ...children.props, id, width, height },
+              children.props.children
+            )
+          : children}
       </div>
     </div>
   );

@@ -1,3 +1,4 @@
+import { DnDContext } from "@/DndContext";
 import {
   Table,
   TableBody,
@@ -8,7 +9,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { handleResize } from "@/lib/utils";
 import { Resizable } from "re-resizable";
+import { useContext } from "react";
 
 const invoices = [
   {
@@ -55,9 +58,36 @@ const invoices = [
   },
 ];
 
-export function TableDemo() {
+export function TableDemo({
+  id,
+  width,
+  height,
+}: {
+  id?: string;
+  width?: number;
+  height?: number;
+}) {
+  const { setDroppedComponents } = useContext(DnDContext);
   return (
-    <Resizable className="p-4 bg-sidebar border border-sidebar-border rounded-2xl">
+    <Resizable
+      defaultSize={{
+        width: width && width > 0 ? width : 400,
+        height: height && height > 0 ? height : 400,
+      }}
+      minHeight={400}
+      minWidth={400}
+      onResize={(e, direction, ref, d) =>
+        handleResize(
+          {
+            width: d.width + 400,
+            height: d.height + 400,
+          },
+          setDroppedComponents,
+          id
+        )
+      }
+      className="p-4 bg-sidebar border border-sidebar-border rounded-2xl"
+    >
       <Table>
         <TableCaption>A list of your recent invoices.</TableCaption>
         <TableHeader>

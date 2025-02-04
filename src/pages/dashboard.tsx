@@ -1,5 +1,5 @@
 import { useDrop } from "react-dnd";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { DnDContext } from "@/DndContext";
 import DraggableComponent from "@/components/DashboardDraggableComp";
 import { CircleChartComponent } from "@/components/charts/CircleChart";
@@ -22,9 +22,16 @@ export default function Dashboard() {
   const { droppedComponents, setDroppedComponents, moveComponent } =
     useContext(DnDContext);
 
+  useEffect(() => {
+    const savedComponents = localStorage.getItem("dashboard_components");
+    if (savedComponents) {
+      setDroppedComponents(JSON.parse(savedComponents));
+    }
+  }, []);
+
   const [, drop] = useDrop(() => ({
     accept: "COMPONENT",
-    drop: (item: { id: string; name: string }) => {
+    drop: (item: { type: string; id: string; name: string }) => {
       setDroppedComponents((prev: any) => [...prev, item]);
     },
   }));
@@ -59,10 +66,12 @@ export default function Dashboard() {
             key={comp.id}
             id={comp.id}
             index={index}
+            width={comp.width ? comp.width : null}
+            height={comp.height ? comp.height : null}
             moveComponent={moveComponent}
             removeComponent={removeComponent}
           >
-            {componentsMap[comp.id]}
+            {componentsMap[comp.type]}
           </DraggableComponent>
         ))}
       </div>

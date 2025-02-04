@@ -1,13 +1,39 @@
+import { DnDContext } from "@/DndContext";
+import { handleResize } from "@/lib/utils";
 import { Resizable } from "re-resizable";
+import { useContext } from "react";
 
-export default function PriceCard() {
+export default function PriceCard({
+  id,
+  width,
+  height,
+}: {
+  id?: string;
+  width?: number;
+  height?: number;
+}) {
+  const { setDroppedComponents } = useContext(DnDContext);
+
   return (
     <Resizable
-      defaultSize={{ width: 200, height: 120 }}
+      defaultSize={{
+        width: width && width > 0 ? width : 200,
+        height: height && height > 0 ? height : 120,
+      }}
       minHeight={120}
       minWidth={200}
       maxHeight={400}
       maxWidth={800}
+      onResize={(e, direction, ref, d) =>
+        handleResize(
+          {
+            width: d.width + 200,
+            height: d.height + 120,
+          },
+          setDroppedComponents,
+          id
+        )
+      }
       className="bg-sidebar text-white p-3 rounded-2xl w-full max-w-sm border border-sidebar-border flex flex-col justify-between"
     >
       <div className="flex justify-between items-center">

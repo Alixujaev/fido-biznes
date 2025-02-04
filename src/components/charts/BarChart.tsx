@@ -18,6 +18,9 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 import { Resizable } from "re-resizable";
+import { useContext } from "react";
+import { DnDContext } from "@/DndContext";
+import { handleResize } from "@/lib/utils";
 const chartData = [
   { month: "January", desktop: 186 },
   { month: "February", desktop: 305 },
@@ -34,12 +37,34 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export function BarChartComponent() {
+export function BarChartComponent({
+  id,
+  width,
+  height,
+}: {
+  id?: string;
+  width?: number;
+  height?: number;
+}) {
+  const { setDroppedComponents } = useContext(DnDContext);
   return (
     <Resizable
-      defaultSize={{ height: 370, width: 400 }}
+      defaultSize={{
+        height: height && height > 0 ? height : 370,
+        width: width && width > 0 ? width : 400,
+      }}
       minHeight={370}
       minWidth={400}
+      onResize={(e, direction, ref, d) =>
+        handleResize(
+          {
+            width: d.width + 400,
+            height: d.height + 370,
+          },
+          setDroppedComponents,
+          id
+        )
+      }
       className="bg-sidebar border border-sidebar-border rounded-2xl"
     >
       <CardHeader>
