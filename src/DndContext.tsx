@@ -12,8 +12,19 @@ export function DnDProvider({ children }: { children: React.ReactNode }) {
     DroppedComponent[]
   >([]);
 
+  const moveComponent = (dragIndex: number, hoverIndex: number) => {
+    setDroppedComponents((prev: DroppedComponent[]) => {
+      const updated = [...prev];
+      const [movedItem] = updated.splice(dragIndex, 1);
+      updated.splice(hoverIndex, 0, movedItem);
+      return updated;
+    });
+  };
+
   return (
-    <DnDContext.Provider value={{ droppedComponents, setDroppedComponents }}>
+    <DnDContext.Provider
+      value={{ droppedComponents, setDroppedComponents, moveComponent }}
+    >
       {children}
     </DnDContext.Provider>
   );
